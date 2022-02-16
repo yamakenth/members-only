@@ -5,6 +5,8 @@ var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
 
+var SECRET_PASSCODE = 'secretpasscode123';
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -48,11 +50,23 @@ router.post('/sign-up', [
       });
       user.save(function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        res.redirect('/join-club');
       });
     });
   }
-]
-);
+]);
+
+router.get('/join-club', function(req, res, next) {
+  res.render('join-club');
+});
+
+router.post('/join-club', function(req, res, next) {
+  if (req.body.secret_passcode !== SECRET_PASSCODE) {
+    var error = 'Enter the valid passcode';
+    res.render('join-club', { passcode: req.body.secret_passcode, error });
+    return;
+  }
+  res.send('GREAT SUCCESS: to do: change membership status');
+});
 
 module.exports = router;

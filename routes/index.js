@@ -43,7 +43,8 @@ router.post('/sign-up', [
         first_name: req.body.first_name.toUpperCase(),
         last_name: req.body.last_name.toUpperCase(),
         username: req.body.email.toLowerCase(),
-        password: hashedPassword
+        password: hashedPassword,
+        is_member: req.body.is_member
       });
       user.save(function(err) {
         if (err) return next(err);

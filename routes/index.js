@@ -6,4 +6,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/sign-up', function(req, res, next) {
+  res.send('NOT IMPLEMENTED: Sign-up Form');
+});
+
 module.exports = router;

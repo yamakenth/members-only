@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
 const { body, validationResult } = require('express-validator');
+var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
 
@@ -37,15 +37,18 @@ router.post('/sign-up', [
       return;
     } 
 
-    var user = new User({
-      first_name: req.body.first_name.toUpperCase(),
-      last_name: req.body.last_name.toUpperCase(),
-      username: req.body.email.toLowerCase(),
-      password: req.body.password
-    });
-    user.save(function(err) {
+    bcrypt.hash(req.body.password, 10, function(err, hashedPassword) {
       if (err) return next(err);
-      res.redirect('/');
+      var user = new User({
+        first_name: req.body.first_name.toUpperCase(),
+        last_name: req.body.last_name.toUpperCase(),
+        username: req.body.email.toLowerCase(),
+        password: hashedPassword
+      });
+      user.save(function(err) {
+        if (err) return next(err);
+        res.redirect('/');
+      });
     });
   }
 ]

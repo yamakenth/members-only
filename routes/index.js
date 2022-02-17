@@ -66,7 +66,11 @@ router.post('/join-club', function(req, res, next) {
     res.render('join-club', { passcode: req.body.secret_passcode, error });
     return;
   }
-  res.send('GREAT SUCCESS: to do: change membership status');
+  res.send('NOT IMPLEMENTED: club member authentication successful');
+});
+
+router.get('/log-in', function(req, res, next) {
+  res.render('log-in-form');
 });
 
 module.exports = router;

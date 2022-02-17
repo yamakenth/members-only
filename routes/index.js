@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const { body, validationResult } = require('express-validator');
-var bcrypt = require('bcryptjs');
 
 var User = require('../models/user');
 
@@ -38,20 +37,16 @@ router.post('/sign-up', [
       res.render('sign-up-form', { user: req.body, errors: errors.array() });
       return;
     } 
-
-    bcrypt.hash(req.body.password, 10, function(err, hashedPassword) {
+    var user = new User({
+      first_name: req.body.first_name.toUpperCase(),
+      last_name: req.body.last_name.toUpperCase(),
+      username: req.body.email.toLowerCase(),
+      password: req.body.password,
+      is_member: req.body.is_member
+    });
+    user.save(function(err) {
       if (err) return next(err);
-      var user = new User({
-        first_name: req.body.first_name.toUpperCase(),
-        last_name: req.body.last_name.toUpperCase(),
-        username: req.body.email.toLowerCase(),
-        password: hashedPassword,
-        is_member: req.body.is_member
-      });
-      user.save(function(err) {
-        if (err) return next(err);
-        res.redirect('/join-club');
-      });
+      res.redirect('/join-club');
     });
   }
 ]);

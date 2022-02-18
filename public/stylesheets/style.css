@@ -1,0 +1,28 @@
+main {
+  height: 100vh;
+  padding: 40px 20px;
+}
+
+form {
+  border: 1px solid #000;
+  border-radius: 12px;
+  width: 320px;
+  margin: 0 auto;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+form h1 {
+  align-self: center;
+  margin: 10px 0 20px;
+}
+
+form button {
+  align-self: center;
+  margin: 10px !important;
+}
+
+.navbar {
+  margin: 0;
+}

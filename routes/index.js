@@ -57,20 +57,32 @@ router.post('/signup', [
   }
 ]);
 
-/*
-router.get('/join-club', function(req, res, next) {
-  res.render('join-club');
+router.get('/membership', function(req, res, next) {
+  res.render('member-credential');
 });
 
-router.post('/join-club', function(req, res, next) {
-  if (req.body.secret_passcode !== SECRET_PASSCODE) {
-    var error = 'Enter the valid passcode';
-    res.render('join-club', { passcode: req.body.secret_passcode, error });
-    return;
+router.post('/membership', function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    var error = 'You need to log in first';
+    res.render('member-credential', { passcode: req.body.secret_passcode, error });
+  } else if (req.body.secret_passcode !== SECRET_PASSCODE) {
+    var error = 'Invalid passcode';
+    res.render('member-credential', { passcode: req.body.secret_passcode, error });
+  } else if (req.isAuthenticated() && req.body.secret_passcode === SECRET_PASSCODE) {
+    var user = new User({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
+      password: req.body.password,
+      member: true,
+      _id: req.user._id
+    });
+    User.findByIdAndUpdate(req.user._id, user, {}, function(err, theuser) {
+      if (err) return next(err);
+      res.send('NOT IMPLEMENTED: club member authentication successful');
+    });
   }
-  res.send('NOT IMPLEMENTED: club member authentication successful');
 });
-*/
 
 // test 
 router.get('/login-success', function(req, res) {

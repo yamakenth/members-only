@@ -73,6 +73,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(function(req, res, next) { 
   console.log(req.session);
   console.log(req.user);
+  if (req.user) {
+    console.log(req.user.member);
+  }
   next(); 
 });
 // test 

@@ -1,3 +1,4 @@
+var bcrypt = require('bcryptjs');
 var express = require('express');
 var router = express.Router();
 const { body, validationResult } = require('express-validator');
@@ -38,16 +39,20 @@ router.post('/signup', [
       res.render('sign-up-form', { user: req.body, errors: errors.array() });
       return;
     } 
-    var user = new User({
-      first_name: req.body.first_name.toUpperCase(),
-      last_name: req.body.last_name.toUpperCase(),
-      username: req.body.email.toLowerCase(),
-      password: req.body.password,
-      member: false
-    });
-    user.save(function(err) {
+
+    bcrypt.hash(req.body.password, 10, function(err, hashedPassword){
       if (err) return next(err);
-      res.redirect('/');
+      var user = new User({
+        first_name: req.body.first_name.toUpperCase(),
+        last_name: req.body.last_name.toUpperCase(),
+        username: req.body.email.toLowerCase(),
+        password: hashedPassword,
+        member: false
+      });
+      user.save(function(err) {
+        if (err) return next(err);
+        res.redirect('/');
+      });
     });
   }
 ]);

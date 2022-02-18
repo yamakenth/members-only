@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  form(action='' method='POST' class='col-sm-6 offset-sm-3')
+      h3 New Message
+      div(class='form-group')
+        label(for='title' class='form-label') Title
+        input(
+          id='title' 
+          name='title' 
+          type='text' 
+          required='true' 
+          maxlength='50'
+          class='form-control'
+        )
+      div(class='form-group')
+        label(for='text' class='form-label') Message
+        textarea(
+          id='text' 
+          name='text' 
+          required='true' 
+          rows='3'
+          maxlength='140'
+          class='form-control'
+        )
+      button(type='submit' class='btn btn-primary float-right') Submit

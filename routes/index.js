@@ -98,4 +98,8 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/');
 });
 
+router.get('/new-message', function(req, res, next) {
+  res.render('message-form', { title: 'New Message' });
+});
+
 module.exports = router;

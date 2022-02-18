@@ -1,7 +1,8 @@
 extends layout
 
 block content
-  h1 hello world this is the homepage
-  h2 from comes here but delegate to different view file 
-  p only members can see this 
   h2 list of messages 
+  if currentUser
+    a(href='/new-message' id='new-message-anchor')
+      i(class='bi bi-plus-lg')
+      |  New Message

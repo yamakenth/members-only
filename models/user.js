@@ -15,4 +15,10 @@ UserSchema
     return this.first_name + ' ' + this.last_name;
   });
 
+UserSchema
+  .virtual('initials')
+  .get(function() {
+    return this.first_name[0] + this.last_name[0];
+  });
+
 module.exports = mongoose.model('User', UserSchema);

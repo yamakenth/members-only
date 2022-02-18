@@ -1,7 +1,22 @@
 extends layout
 
 block content
-  h2 list of messages 
+  div(class='col-sm-10 offset-sm-1 message-display')
+    ul
+      each message in message_list
+        li(class='message-block d-flex')
+          div(class='avatar')
+            p= message.author.initials
+          div(class='message-main')
+            div(class='message-content')
+              h3= message.title
+              p= message.text
+            div(class='footer d-flex')
+              p= message.author.full_name
+              p= message.timestamp_formatted
+      else 
+        li There are no messages.
+
   if currentUser
     a(href='/new-message' id='new-message-anchor')
       i(class='bi bi-plus-lg')

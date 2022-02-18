@@ -9,9 +9,14 @@ var Message = require('../models/message');
 
 var SECRET_PASSCODE = 'secretpasscode123';
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Members Only' });
+  Message.find()
+    .sort({ timestamp: -1 })
+    .populate('author')
+    .exec(function(err, list_messages) {
+      if (err) return next(err);
+      res.render('index', { title: 'Members Only', message_list: list_messages });
+    });
 });
 
 router.get('/signup', function(req, res, next) {

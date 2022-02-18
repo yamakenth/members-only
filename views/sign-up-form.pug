@@ -55,7 +55,8 @@ block content
       )
     button(type='submit' class='btn btn-primary align-self-center') Sign Up
   
-  if errors
-    ul
-      for error in errors
-        li!= error.msg
+  if errors 
+    div(class='alert alert-danger' role='alert') 
+      ul 
+        for error in errors
+          li!= error.msg

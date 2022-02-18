@@ -5,6 +5,7 @@ const { body, validationResult } = require('express-validator');
 var passport = require('passport');
 
 var User = require('../models/user');
+var Message = require('../models/message');
 
 var SECRET_PASSCODE = 'secretpasscode123';
 
@@ -100,6 +101,19 @@ router.get('/logout', function(req, res, next) {
 
 router.get('/new-message', function(req, res, next) {
   res.render('message-form', { title: 'New Message' });
+});
+
+router.post('/new-message', function(req, res, next) {
+  var message = new Message({
+    title: req.body.title,
+    text: req.body.text,
+    author: req.user._id,
+    timestamp: Date.now()
+  });
+  message.save(function(err) {
+    if (err) return next(err);
+    res.redirect('/');
+  });
 });
 
 module.exports = router;

@@ -10,7 +10,7 @@ var SECRET_PASSCODE = 'secretpasscode123';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Members Only' });
 });
 
 router.get('/signup', function(req, res, next) {
@@ -84,22 +84,13 @@ router.post('/membership', function(req, res, next) {
   }
 });
 
-// test 
-router.get('/login-success', function(req, res) {
-  res.send('log in successful');
-});
-router.get('/login-fail', function(req, res) {
-  res.send('log in failed');
-});
-// test 
-
 router.get('/login', function(req, res, next) {
   res.render('log-in-form');
 });
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/login-success',
-  failureRedirect: '/login-fail'
+  successRedirect: '/',
+  failureRedirect: '/login'
 }));
 
 router.get('/logout', function(req, res, next) {

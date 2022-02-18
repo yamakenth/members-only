@@ -11,11 +11,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/sign-up', function(req, res, next) {
+router.get('/signup', function(req, res, next) {
   res.render('sign-up-form');
 });
 
-router.post('/sign-up', [
+router.post('/signup', [
   body('first_name').trim().escape(),
   body('last_name').trim().escape(),
   body('email').isEmail().normalizeEmail(),
@@ -42,15 +42,16 @@ router.post('/sign-up', [
       last_name: req.body.last_name.toUpperCase(),
       username: req.body.email.toLowerCase(),
       password: req.body.password,
-      is_member: req.body.is_member
+      member: false
     });
     user.save(function(err) {
       if (err) return next(err);
-      res.redirect('/join-club');
+      res.redirect('/');
     });
   }
 ]);
 
+/*
 router.get('/join-club', function(req, res, next) {
   res.render('join-club');
 });
@@ -63,8 +64,9 @@ router.post('/join-club', function(req, res, next) {
   }
   res.send('NOT IMPLEMENTED: club member authentication successful');
 });
+*/
 
-router.get('/log-in', function(req, res, next) {
+router.get('/login', function(req, res, next) {
   res.render('log-in-form');
 });
 

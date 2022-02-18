@@ -43,12 +43,6 @@ block content
       required='true' 
       value=((user===undefined) ? '' : user['password-confirmation'])
     )
-    input(
-      id='is-member' 
-      name='is_member'
-      type='hidden'
-      value='false'
-    )
     button(type='submit') Sign Up
   
   if errors

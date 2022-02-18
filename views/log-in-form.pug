@@ -1,10 +1,10 @@
 extends layout
 
 block content
-  form(action='' method='POST')
+  form(action='' method='POST' class='col-sm-6 offset-sm-3 d-flex flex-column')
     h1 Login
     div(class='form-group')
-      label(for='email') Email
+      label(for='email' class='form-label') Email
       input(
         id='email' 
         name='email' 
@@ -14,7 +14,7 @@ block content
         class='form-control'
       )
     div(class='form-group')
-      label(for='password') Password
+      label(for='password' class='form-label') Password
       input(
         id='password' 
         name='password' 
@@ -23,7 +23,7 @@ block content
         value=((user===undefined) ? '' : user.password)
         class='form-control'
       )
-    button(type='submit' class='btn btn-default') Login
+    button(type='submit' class='btn btn-primary align-self-center') Login
   
   if errors
     ul

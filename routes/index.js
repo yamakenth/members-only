@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/signup', function(req, res, next) {
-  res.render('sign-up-form');
+  res.render('sign-up-form', { title: 'Signup'});
 });
 
 router.post('/signup', [
@@ -36,7 +36,7 @@ router.post('/signup', [
     var errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.render('sign-up-form', { user: req.body, errors: errors.array() });
+      res.render('sign-up-form', { title: 'Signup', user: req.body, errors: errors.array() });
       return;
     } 
 
@@ -58,16 +58,16 @@ router.post('/signup', [
 ]);
 
 router.get('/membership', function(req, res, next) {
-  res.render('member-credential');
+  res.render('member-credential', { title: 'Membership'});
 });
 
 router.post('/membership', function(req, res, next) {
   if (!req.isAuthenticated()) {
     var error = 'You need to log in first';
-    res.render('member-credential', { passcode: req.body.secret_passcode, error });
+    res.render('member-credential', { title: 'Membership', passcode: req.body.secret_passcode, error });
   } else if (req.body.secret_passcode !== SECRET_PASSCODE) {
     var error = 'Invalid passcode';
-    res.render('member-credential', { passcode: req.body.secret_passcode, error });
+    res.render('member-credential', { title: 'Membership', passcode: req.body.secret_passcode, error });
   } else if (req.isAuthenticated() && req.body.secret_passcode === SECRET_PASSCODE) {
     var user = new User({
       first_name: req.body.first_name,
@@ -79,13 +79,13 @@ router.post('/membership', function(req, res, next) {
     });
     User.findByIdAndUpdate(req.user._id, user, {}, function(err, theuser) {
       if (err) return next(err);
-      res.send('NOT IMPLEMENTED: club member authentication successful');
+      res.redirect('/');
     });
   }
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('log-in-form');
+  res.render('log-in-form', { title: 'Login'});
 });
 
 router.post('/login', passport.authenticate('local', {

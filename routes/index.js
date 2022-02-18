@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { body, validationResult } = require('express-validator');
+var passport = require('passport');
 
 var User = require('../models/user');
 
@@ -66,8 +67,22 @@ router.post('/join-club', function(req, res, next) {
 });
 */
 
+// test 
+router.get('/login-success', function(req, res) {
+  res.send('log in successful');
+});
+router.get('/login-fail', function(req, res) {
+  res.send('log in failed');
+});
+// test 
+
 router.get('/login', function(req, res, next) {
   res.render('log-in-form');
 });
+
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/login-success',
+  failureRedirect: '/login-fail'
+}));
 
 module.exports = router;

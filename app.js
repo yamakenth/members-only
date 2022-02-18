@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var User = require('./models/user');
 
 var app = express();
 
@@ -28,7 +31,40 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+passport.use(
+  new LocalStrategy(
+    { usernameField: 'email', passwordField: 'password' },
+    function(username, password, done) {
+      User.findOne({ username: username }, function(err, user) {
+        if (err) return done(err);
+
+        if (!user) {
+          return done(null, false, { message: 'Username not found' });
+        }
+        if (user.password !== password) {
+          return done(null, false, {message: 'Incorrect password' });
+        }
+        return done(null, user);
+      });
+    }
+  )
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

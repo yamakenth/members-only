@@ -9,18 +9,18 @@ block content
             div(class='message-author')
               div(class='avatar float-left')
                 i(class='bi bi-person-circle')
-              if currentUser
+              if currentUser && currentUser.member
                 p= message.author.full_name
               else 
-                p Login to view author
+                p Become a member to view author
             p= message.timestamp_formatted
           div(class='message-main')
-            if currentUser
+            if currentUser && currentUser.member
               h3= message.title
               p= message.text
             else 
-              h3 Login to view title
-              p Login to view message
+              h3 Become a member to view title
+              p Become a member to view message
       else 
         li There are no messages.
   if currentUser

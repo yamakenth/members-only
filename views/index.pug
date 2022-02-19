@@ -4,19 +4,25 @@ block content
   div(class='col-sm-10 offset-sm-1 message-display')
     ul
       each message in message_list
-        li(class='message-block d-flex')
-          div(class='avatar')
-            p= message.author.initials
+        div(class='message-block')
+          div(class='message-header')
+            div(class='message-author')
+              div(class='avatar float-left')
+                i(class='bi bi-person-circle')
+              if currentUser
+                p= message.author.full_name
+              else 
+                p Login to view author
+            p= message.timestamp_formatted
           div(class='message-main')
-            div(class='message-content')
+            if currentUser
               h3= message.title
               p= message.text
-            div(class='footer d-flex')
-              p= message.author.full_name
-              p= message.timestamp_formatted
+            else 
+              h3 Login to view title
+              p Login to view message
       else 
         li There are no messages.
-
   if currentUser
     a(href='/new-message' id='new-message-anchor')
       i(class='bi bi-plus-lg')

@@ -71,8 +71,6 @@ form button {
   margin-bottom: 20px;
 }
 
-.avatar p {
-  border: 1px solid #fff;
-  border-radius: 50%;
-  font-size: 4rem;
+.avatar i {
+  font-size: 2rem;
 }

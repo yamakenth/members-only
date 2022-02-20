@@ -55,3 +55,7 @@ form textarea {
 .delete-button a:hover {
   color: #ac2331 !important;
 }
+
+.delete-form {
+  background-color: #0f1214 !important;
+}

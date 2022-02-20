@@ -6,10 +6,6 @@ body {
 
 form {
   border-radius: 12px;
-  /* border: 1px solid #000; */
-  /* padding: 10px 30px; */
-  /* background-color: #343a3f; */
-  /* overflow: hidden; */
 }
 
 .form-group {
@@ -35,16 +31,11 @@ form textarea {
   color: #d1d2d3 !important;
 }
 
+main {
+  border: 1px solid red;
+}
+
 /*
-
-.navbar {
-  margin: 0;
-}
-
-.nav-brand-logo {
-  color: #2ea1ff;
-}
-
 #new-message-anchor {
   position: fixed;
   bottom: 30px;
@@ -55,6 +46,7 @@ form textarea {
   border: none;
   border-radius: 12px;
   font-size: 1.2rem;
+  text-decoration: none;
 }
 
 #new-message-anchor:hover {
@@ -63,6 +55,17 @@ form textarea {
   color: #fff;
   transform: scale(1.05);
 }
+*/
+
+/*
+.navbar {
+  margin: 0;
+}
+
+.nav-brand-logo {
+  color: #2ea1ff;
+}
+
 
 .message-display ul {
   list-style: none;

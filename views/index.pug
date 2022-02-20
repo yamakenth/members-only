@@ -1,20 +1,20 @@
 extends layout
 
 block content
-  div(class='col-sm-10 offset-sm-1 message-display')
+  div(class='col-sm-10 offset-sm-1')
     ul
       each message in message_list
-        div(class='message-block')
-          div(class='message-header')
-            div(class='message-author')
-              div(class='avatar float-left')
+        div
+          div
+            div
+              div
                 i(class='bi bi-person-circle')
               if currentUser && currentUser.member
                 p= message.author.full_name
               else 
                 p Become a member to view author
             p= message.timestamp_formatted
-          div(class='message-main')
+          div
             if currentUser && currentUser.member
               h3= message.title
               p= message.text
@@ -23,7 +23,3 @@ block content
               p Become a member to view message
       else 
         li There are no messages.
-  if currentUser
-    a(href='/new-message' id='new-message-anchor')
-      i(class='bi bi-plus-lg')
-      |  New Message

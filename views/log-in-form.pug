@@ -25,8 +25,10 @@ block content
       )
     button(type='submit' class='btn btn-primary align-self-center') Login
   
-  if errors 
-    div(class='text-danger' role='alert') 
-      ul 
-        for error in errors
-          li!= error.msg
+    if errors 
+      div(class='text-danger') 
+        ul 
+          for error in errors
+            li!= error.msg
+    if alert 
+      p(class='text-info')= alert

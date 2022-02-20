@@ -59,7 +59,7 @@ router.post('/signup', [
       });
       user.save(function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        res.render('log-in-form', { title: 'Login', alert: 'Please login to confirm signup.' });
       });
     });
   }

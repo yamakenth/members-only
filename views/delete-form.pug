@@ -1,0 +1,19 @@
+extends layout 
+
+block content
+  div(class='bg-dark mb-3 p-3 message-block')
+    //- row 1
+    div(class='d-sm-flex justify-content-between mb-1 row-1')
+      div(class='message-header d-flex gap-1')
+        //- avatar
+        i(class='bi bi-person-circle')
+        //- author
+        p= message.author.full_name
+      //- timestamp
+      p= message.timestamp_formatted
+    //- row 2
+    div(class='message-content p-2 rounded')
+      //- message title
+      h3(class='pb-1')= message.title
+      //- message text
+      p= message.text

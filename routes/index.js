@@ -152,4 +152,13 @@ router.post('/new-message', function(req, res, next) {
   });
 });
 
+router.get('/delete/:id', function(req, res, next) {
+  Message.findById(req.params.id)
+    .populate('author')
+    .exec(function(err, message) {
+      if (err) return next(err);
+      res.render('delete-form', { title: 'Delete Message', message: message });
+    });
+});
+
 module.exports = router;

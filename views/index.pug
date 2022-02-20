@@ -50,6 +50,6 @@ block content
           if currentUser && currentUser.admin
             //- Button trigger modal
             div(class='d-flex justify-content-end mt-3 delete-button')
-              a(href='#') Delete Message
+              a(href='/delete/' + message._id) Delete Message
       else 
         p There are no messages.

@@ -7,11 +7,16 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
+var compression = require('compression');
+var helmet = require('helmet');
 
 var indexRouter = require('./routes/index');
 var User = require('./models/user');
 
 var app = express();
+
+app.use(helmet());
+app.use(compression());
 
 // set up mongoose connection
 require('dotenv').config();

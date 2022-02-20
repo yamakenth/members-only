@@ -161,4 +161,11 @@ router.get('/delete/:id', function(req, res, next) {
     });
 });
 
+router.post('/delete/:id', function(req, res, next) {
+  Message.findByIdAndRemove(req.params.id, function(err) {
+    if(err) return next(err);
+    res.redirect('/');
+  });
+});
+
 module.exports = router;

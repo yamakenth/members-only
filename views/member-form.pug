@@ -16,4 +16,9 @@ block content
     button(type='submit' class='btn btn-primary align-self-center') Submit
   
     if error
-      div(class='text-danger' role='alert') #{error}
+      div(class='text-danger') #{error}
+    
+    if title == 'Member Login' && currentUser.member
+      div(class='text-danger') You are already a member
+    if title == 'Admin Login' && currentUser.admin
+      div(class='text-danger') You are already an admin

@@ -8,6 +8,7 @@
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
   "dependencies": {
+    "async": "^3.2.3",
     "bcryptjs": "^2.4.3",
     "bootstrap-icons": "^1.8.1",
     "cookie-parser": "~1.4.4",

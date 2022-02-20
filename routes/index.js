@@ -59,7 +59,7 @@ router.post('/signup', [
       });
       user.save(function(err) {
         if (err) return next(err);
-        res.render('log-in-form', { title: 'Login', alert: 'Please login to confirm signup.' });
+        res.redirect('/');
       });
     });
   }
@@ -110,7 +110,7 @@ router.post('/admin', function(req, res, next) {
       last_name: req.body.last_name,
       username: req.body.username,
       password: req.body.password,
-      member: req.user.member,
+      member: true,
       admin: true,
       _id: req.user._id
     });

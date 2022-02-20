@@ -46,6 +46,10 @@ block content
               p 
                 a(href='/login') Login
                 |  to view message content
-      
+          //- row 3
+          if currentUser && currentUser.admin
+            //- Button trigger modal
+            div(class='d-flex justify-content-end mt-3 delete-button')
+              a(href='#') Delete Message
       else 
         p There are no messages.

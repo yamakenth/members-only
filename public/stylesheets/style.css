@@ -47,27 +47,11 @@ form textarea {
   margin-bottom: 0;
 }
 
-/*
-.navbar {
-  margin: 0;
+.delete-button a {
+  color: #dc3444 !important;
+  text-decoration: none;
 }
 
-.nav-brand-logo {
-  color: #2ea1ff;
+.delete-button a:hover {
+  color: #ac2331 !important;
 }
-
-
-.message-display ul {
-  list-style: none;
-  padding: 0;
-}
-
-.message-block {
-  background-color: #343a3f;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.avatar i {
-  font-size: 2rem;
-} */

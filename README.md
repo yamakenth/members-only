@@ -9,9 +9,9 @@ who are members, users who are members and admins
 - Logged-in users can post messages 
 - Both logged-in and non-logged-in users are not able to read messages or see authors' names
 ## Live Demo
-- [Click here]()
-- Password to become a member: secretpasscode123
-- Password to become an admin: secretpasscodeadmin123
+- [Click here](https://stormy-ocean-24691.herokuapp.com)
+- Password to become a member: **secretpasscode123**
+- Password to become an admin: **secretpasscodeadmin123**
 ## Skills/Technology Practiced:
 - Node.js 
 - Express.js

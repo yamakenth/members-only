@@ -8,6 +8,7 @@ var User = require('../models/user');
 var Message = require('../models/message');
 
 var SECRET_PASSCODE = 'secretpasscode123';
+var SECRET_PASSCODE_ADMIN = 'secretpasscodeadmin123';
 
 router.get('/', function(req, res, next) {
   Message.find()
@@ -53,7 +54,8 @@ router.post('/signup', [
         last_name: req.body.last_name.toUpperCase(),
         username: req.body.email.toLowerCase(),
         password: hashedPassword,
-        member: false
+        member: false,
+        admin: false
       });
       user.save(function(err) {
         if (err) return next(err);
@@ -64,16 +66,16 @@ router.post('/signup', [
 ]);
 
 router.get('/membership', function(req, res, next) {
-  res.render('member-form', { title: 'Membership'});
+  res.render('member-form', { title: 'Member Login' });
 });
 
 router.post('/membership', function(req, res, next) {
   if (!req.isAuthenticated()) {
     var error = 'You need to log in first';
-    res.render('member-form', { title: 'Membership', passcode: req.body.secret_passcode, error });
+    res.render('member-form', { title: 'Member Login', passcode: req.body.secret_passcode, error });
   } else if (req.body.secret_passcode !== SECRET_PASSCODE) {
     var error = 'Invalid passcode';
-    res.render('member-form', { title: 'Membership', passcode: req.body.secret_passcode, error });
+    res.render('member-form', { title: 'Member Login', passcode: req.body.secret_passcode, error });
   } else if (req.isAuthenticated() && req.body.secret_passcode === SECRET_PASSCODE) {
     var user = new User({
       first_name: req.body.first_name,
@@ -81,6 +83,35 @@ router.post('/membership', function(req, res, next) {
       username: req.body.username,
       password: req.body.password,
       member: true,
+      admin: req.user.admin,
+      _id: req.user._id
+    });
+    User.findByIdAndUpdate(req.user._id, user, {}, function(err, theuser) {
+      if (err) return next(err);
+      res.redirect('/');
+    });
+  }
+});
+
+router.get('/admin', function(req, res, next) {
+  res.render('member-form', { title: 'Admin Login' });
+});
+
+router.post('/admin', function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    var error = 'You need to log in first';
+    res.render('member-form', { title: 'Admin Login', passcode: req.body.secret_passcode, error });
+  } else if (req.body.secret_passcode !== SECRET_PASSCODE_ADMIN) {
+    var error = 'Invalid passcode';
+    res.render('member-form', { title: 'Admin Login', passcode: req.body.secret_passcode, error });
+  } else if (req.isAuthenticated() && req.body.secret_passcode === SECRET_PASSCODE_ADMIN) {
+    var user = new User({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
+      password: req.body.password,
+      member: req.user.member,
+      admin: true,
       _id: req.user._id
     });
     User.findByIdAndUpdate(req.user._id, user, {}, function(err, theuser) {

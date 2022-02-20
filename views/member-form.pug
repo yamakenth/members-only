@@ -2,7 +2,7 @@ extends layout
 
 block content
   form(action='' method='POST' class='col-sm-6 offset-sm-3 d-flex flex-column bg-dark p-3')
-    h1(class='align-self-center') Membership
+    h1(class='align-self-center')= title
     div(class='form-group')
       label(for='secret-passcode' class='form-label') Secret Passcode
       input(

@@ -31,31 +31,21 @@ form textarea {
   color: #d1d2d3 !important;
 }
 
-main {
-  border: 1px solid red;
-}
-
-/*
-#new-message-anchor {
-  position: fixed;
-  bottom: 30px;
-  right: 30px; 
-  background-color: #10caf0;
-  color: #f7f8f9;
-  padding: 6px 12px;
-  border: none;
+.message-block {
   border-radius: 12px;
-  font-size: 1.2rem;
-  text-decoration: none;
 }
 
-#new-message-anchor:hover {
-  text-decoration: none;
-  background-color: #10b8da;
-  color: #fff;
-  transform: scale(1.05);
+.message-content {
+  background-color: #71787e;
 }
-*/
+
+.message-content h3 {
+  border-bottom: 1px solid #8f959b;
+}
+
+.row-1 p {
+  margin-bottom: 0;
+}
 
 /*
 .navbar {

@@ -1,25 +1,51 @@
 extends layout
 
 block content
-  div(class='col-sm-10 offset-sm-1')
-    ul
+  div(class='container-fluid')
       each message in message_list
-        div
-          div
-            div
-              div
-                i(class='bi bi-person-circle')
+        div(class='bg-dark mb-3 p-3 message-block')
+          //- row 1
+          div(class='d-sm-flex justify-content-between mb-1 row-1')
+            div(class='message-header d-flex gap-1')
+              //- avatar
+              i(class='bi bi-person-circle')
+              //- author
               if currentUser && currentUser.member
                 p= message.author.full_name
+              else if currentUser
+                p 
+                  a(href='/membership') Become a member
+                  |  to view author
               else 
-                p Become a member to view author
+                p 
+                  a(href='/login') Login
+                  |  to view author
+            //- timestamp
             p= message.timestamp_formatted
-          div
+          //- row 2
+          div(class='message-content p-2 rounded')
+            //- message title
             if currentUser && currentUser.member
-              h3= message.title
-              p= message.text
+              h3(class='pb-1')= message.title
+            else if currentUser
+              h3(class='pb-1')
+                a(href='/membership') Become a member
+                |  to view message title
             else 
-              h3 Become a member to view title
-              p Become a member to view message
+              h3(class='pb-1')
+                a(href='/login') Login
+                |  to view message title
+            //- message text
+            if currentUser && currentUser.member
+              p= message.text
+            else if currentUser
+              p 
+                a(href='/membership') Become a member
+                |  to view message content
+            else 
+              p 
+                a(href='/login') Login
+                |  to view message content
+      
       else 
-        li There are no messages.
+        p There are no messages.
